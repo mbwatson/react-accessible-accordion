@@ -32,6 +32,13 @@ This accordion component is fully accessible and animated. The package uses and 
 ```bash
 npm i react-accessible-accordion
 ```
+## Development
+
+An example lives in the `./example` directory. This is a React application bootsrapped with create-react-app. To develop, we'll need to link the example to the project source.
+
+First, execute `sudo npm link` from the project root. Then execute `npm link ../` from the `./example` directory. Tells the example React app to use the local version of `react-accessible-accordion` instead of installing it from npm. Next we want both projects (`react-accessible-accordion` _and_ the example app) to use the same installation of React, so we'll link the project to the example's version of React with `npm link ./example/node_modules/react/` from the project root.
+
+To see the example, execute `npm start` from the `./example` directory. Now develop the `react-accessible-accordion` package as needed, and rebuild with `npm run build` from the project root to see the changes reflected in the example app.
 
 ## Usage
 
