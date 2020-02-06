@@ -7,10 +7,11 @@ const PanelWrapper = styled.div`
     margin-bottom: 1rem;
 `
 
-const Title = styled.h2`
+const Title = styled.h3`
     margin: 0;
     padding: 0 1rem;
     flex: 1;
+    font-weight: normal;
 `
 
 const HeaderButton = styled.button`
