@@ -58,19 +58,14 @@ class Example extends Component {
 
         <Accordion>
           <Panel title="Lorem ipsum." id="lorem-ipsum">
-            <div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, quas nostrum facere non nobis tenetur odit incidunt quae deserunt quisquam, deleniti at maxime.</p>
-            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, quas nostrum facere non nobis.</p>
+            <p>Tenetur odit incidunt quae deserunt quisquam, deleniti at maxime.</p>
           </Panel>
           <Panel title="Lorem ipsum dolor." id="lorem-ipsum-dolor">
-            <div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam nostrum nesciunt velit labore, iste quae et possimus veritatis error numquam quasi vel eos.</p>
-            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam nostrum nesciunt velit labore, iste quae et possimus veritatis error numquam quasi vel eos.</p>
           </Panel>
           <Panel title="Lorem ipsum sit amet." id="lorem-ipsum-sit-amet">
-            <div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur pariatur, expedita quos eaque deserunt facere reiciendis eligendi voluptatum asperiores, ullam voluptates! Officia numquam ea provident est, facere non repudiandae, sunt. Accusamus praesentium id quibusdam suscipit eius distinctio reprehenderit libero possimus a optio culpa aut quis quae, ipsa ratione nobis facere!</p>
-            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur pariatur, expedita quos eaque deserunt facere reiciendis eligendi voluptatum asperiores, ullam voluptates! Officia numquam ea provident est, facere non repudiandae, sunt. Accusamus praesentium id quibusdam suscipit eius distinctio reprehenderit libero possimus a optio culpa aut quis quae, ipsa ratione nobis facere!</p>
           </Panel>
         </Accordion>
 
@@ -78,6 +73,38 @@ class Example extends Component {
     )
   }
 }
+```
+
+### Custom Styling
+
+The `Panel` component takes an object for the `style` prop to allow for styling the panel header, title, and body.
+
+```jsx
+
+const panelStyles = {
+    header: {
+        backgroundColor: 'wheat',
+        border: '1px solid coral',
+    },
+    title: {
+        color: '#444',
+        fontWeight: 'bold',
+    },
+    body: {
+        borderWidth: '0 1px 1px 1px',
+        borderStyle: 'solid',
+        borderColor: 'coral',
+    },
+}
+
+//...
+
+    <Panel title="Lorem ipsum." id="lorem-ipsum" styles={ panelStyles }>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, quas nostrum facere non nobis.</p>
+        <p>Tenetur odit incidunt quae deserunt quisquam, deleniti at maxime.</p>
+    </Panel>
+
+//...
 ```
 
 ## License

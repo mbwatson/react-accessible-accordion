@@ -26,6 +26,22 @@ const ListItem = styled.li`
     line-height: 2;
 `
 
+const panelStyles = {
+    header: {
+        backgroundColor: 'wheat',
+        border: '1px solid coral',
+    },
+    title: {
+        color: '#444',
+        fontWeight: 'bold',
+    },
+    body: {
+        borderWidth: '0 1px 1px 1px',
+        borderStyle: 'solid',
+        borderColor: 'coral',
+    },
+}
+
 export default class App extends Component {
     render () {
         return (
@@ -40,42 +56,42 @@ export default class App extends Component {
 
 
                 <Accordion>
-                    <Panel title="SPACE & ENTER" id="space-and-enter">
+                    <Panel title="SPACE & ENTER" id="space-and-enter" styles={ panelStyles }>
                         <List>
                             <ListItem>✔ When focus is on the accordion header of a collapsed section, expands the section.</ListItem>
-                            <ListItem>⭐ When focus is on the accordion header of an expanded section, collapses the section.</ListItem>
+                            <ListItem>✔ When focus is on the accordion header of an expanded section, collapses the section.</ListItem>
                         </List>
                     </Panel>
-                    <Panel title="TAB" id="tab">
+                    <Panel title="TAB" id="tab" styles={ panelStyles }>
                         <List>
                             <ListItem>✔ Moves focus to the next focusable element.</ListItem>
                             <ListItem>✔ All focusable elements in the accordion are included in the page Tab sequence.</ListItem>
                          </List>
                     </Panel>
-                    <Panel title="SHIFT + TAB" id="shift-plus-tab">
+                    <Panel title="SHIFT + TAB" id="shift-plus-tab" styles={ panelStyles }>
                         <List>
                             <ListItem>✔ Moves focus to the previous focusable element.</ListItem>
                             <ListItem>✔ All focusable elements in the accordion are included in the page Tab sequence.</ListItem>
                          </List>
                     </Panel>
-                    <Panel title="DOWN ARROW" id="down-arrow">
+                    <Panel title="DOWN ARROW" id="down-arrow" styles={ panelStyles }>
                         <List>
                             <ListItem>✔ When focus is on an accordion header, moves focus to the next accordion header.</ListItem>
                             <ListItem>✔ When focus is on last accordion header, moves focus to first accordion header.</ListItem>
                          </List>
                     </Panel>
-                    <Panel title="UP ARROW" id="up-arrow">
+                    <Panel title="UP ARROW" id="up-arrow" styles={ panelStyles }>
                         <List>
                             <ListItem>✔ When focus is on an accordion header, moves focus to the previous accordion header.</ListItem>
                             <ListItem>✔ When focus is on first accordion header, moves focus to last accordion header.</ListItem>
                          </List>
                     </Panel>
-                    <Panel title="HOME" id="home">
+                    <Panel title="HOME" id="home" styles={ panelStyles }>
                         <List>
                             <ListItem>✔ When focus is on an accordion header, moves focus to the first accordion header.</ListItem>
                         </List>
                     </Panel>
-                    <Panel title="END" id="end">
+                    <Panel title="END" id="end" styles={ panelStyles }>
                         <List>
                             <ListItem>✔ When focus is on an accordion header, moves focus to the last accordion header.</ListItem>
                         </List>

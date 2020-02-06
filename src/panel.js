@@ -29,8 +29,7 @@ const HeaderButton = styled.button`
     border: 1px solid;
     border-color: #eee;
     &:hover, &:focus {
-        background-color: #ddd;
-        border-color: #ccc;
+        filter: saturate(0.5);
     }
 `
 
@@ -40,7 +39,7 @@ const PanelHeader = styled.h5`
     align-items: center;
     cursor: pointer;
     transition: background-color 250ms;
-    background-color: #ccc;
+    // background-color: #ccc;
 `
 
 const IconWrapper = styled.span`
@@ -51,7 +50,6 @@ const PanelBody = styled.div`
     padding: 0;
     overflow: hidden;
     background-color: #fff;
-    border: 1px solid #ddd;
     transition: ${ props => props.active
         ? `max-height 250ms, opacity 500ms 100ms`
         : `max-height 500ms 100ms, opacity 250ms`
@@ -64,7 +62,7 @@ const PanelContents = styled.div`
     padding: 1rem;
 `
 
-export const Panel = ({ active, focused, id, title, children, ...rest }) => {
+export const Panel = ({ active, focused, id, title, children, styles = {}, ...rest }) => {
     const [height, setHeight] = useState(0)
     const bodyElement = useRef(null)
     const panelRef = useRef()
@@ -85,8 +83,8 @@ export const Panel = ({ active, focused, id, title, children, ...rest }) => {
     return (
         <PanelWrapper id={ id } { ...rest }>
             <PanelHeader>
-                <HeaderButton id={ headerId } aria-controls={ bodyId } aria-expanded={ active }ref={ panelRef }>
-                    <Title>{ title }</Title>
+                <HeaderButton id={ headerId } style={ styles.header } aria-controls={ bodyId } aria-expanded={ active } ref={ panelRef }>
+                    <Title style={ styles.title }>{ title }</Title>
                     <IconWrapper>
                         <ExpandIcon size={ 12 } active={ active } color={ active ? 'crimson' : '#333' } />
                     </IconWrapper>
@@ -96,7 +94,7 @@ export const Panel = ({ active, focused, id, title, children, ...rest }) => {
                 active={ active } height={ height } ref={ bodyElement }
                 id={ bodyId } aria-labelledby={ headerId }
             >
-                <PanelContents hidden={ !active }>
+                <PanelContents hidden={ !active } style={ styles.body }>
                     { children }
                 </PanelContents>
             </PanelBody>
