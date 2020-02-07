@@ -47,9 +47,9 @@ export default class App extends Component {
                 <Accordion>
                     {
                         requirements.map(({ title, id, actions}) => (
-                            <Panel title={ title } id={ id } styles={ panelStyles }>
+                            <Panel key={ id } title={ title } id={ id } styles={ panelStyles }>
                                 <ul>
-                                    { actions.map(action => <li>✔ { action }</li>) }
+                                    { actions.map((action, i) => <li key={ i }>✔ { action }</li>) }
                                 </ul>
                             </Panel>
 
