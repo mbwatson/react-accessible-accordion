@@ -62,7 +62,7 @@ const PanelContents = styled.div`
     padding: 1rem;
 `
 
-export const Panel = ({ active, focused, id, title, children, styles = {}, ...rest }) => {
+export const Panel = ({ active, focused, id, title, children, styles = {}, clickHandler, ...rest }) => {
     const [height, setHeight] = useState(0)
     const bodyElement = useRef(null)
     const panelRef = useRef()
@@ -83,7 +83,7 @@ export const Panel = ({ active, focused, id, title, children, styles = {}, ...re
     return (
         <PanelWrapper id={ id } { ...rest }>
             <PanelHeader>
-                <HeaderButton id={ headerId } style={ styles.header } aria-controls={ bodyId } aria-expanded={ active } ref={ panelRef }>
+                <HeaderButton id={ headerId } onClick={ clickHandler } style={ styles.header } aria-controls={ bodyId } aria-expanded={ active } ref={ panelRef }>
                     <Title style={ styles.title }>{ title }</Title>
                     <IconWrapper>
                         <ExpandIcon size={ 12 } active={ active } color={ active ? 'crimson' : '#333' } />

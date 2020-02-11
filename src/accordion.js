@@ -78,7 +78,7 @@ const Panels = ({ children }) => {
                         key: id,
                         active: activeIds.includes(id),
                         focused: i === focusedIndex,
-                        onClick: toggleId(id),
+                        clickHandler: toggleId(id),
                         onFocus: () => setFocusedIndex(i),
                         onKeyDown: event => {
                             switch(event.key) {
