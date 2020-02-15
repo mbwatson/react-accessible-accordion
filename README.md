@@ -25,7 +25,7 @@ accessible accordions have the following required keyboard support:
 - 🔑 END:
     + When focus is on an accordion header, moves focus to the last accordion header.
 
-This accordion component satisfies the above requirements and thus is fully accessible. The package uses [React](https://reactjs.org/) and [styled-components](https://styled-components.com/).
+This accordion component satisfies the above requirements and thus is fully accessible. The package depends [React](https://reactjs.org/). Prior to version 1.1.0, [styled-components](https://styled-components.com/) was a dependency.
 
 ## Install
 
@@ -76,7 +76,7 @@ from the `./example` directory. Now develop the `react-accessible-accordion` pac
 
 ## Usage
 
-Use the `Accordion` component to wrap `Panel` components. Children of `Accordion` must be `Panel` components--just supply unique `id`s of the `Panel` components.
+Use the `Accordion` component to wrap `Panel` components. Children of `Accordion` must be `Panel` components and their `id`s must be unique.
 
 ```jsx
 import React, { Component } from 'react'
@@ -111,33 +111,41 @@ class Example extends Component {
 
 ### Custom Styling
 
-The `Panel` component takes an object for the `styles` prop whose properties will be distributed to the appropriate parts of the Panel component. This lets the developer pass in styling overrides to the panel to style the panel header, title, and body.
+The root `Accordion` component takes an object for the `styles` prop, whose properties will be distributed to the appropriate parts of the `Panel` component. See the example below. This lets the developer pass in styling overrides to the panel to style the panel headers, titles, and bodies. Each panel receives the same styling.
 
 ```jsx
-const panelStyles = {
+  const panelStyles = {
     header: {
-        backgroundColor: 'wheat',
-        border: '1px solid coral',
+      backgroundColor: 'beige',
+      border: '1px solid darkcyan',
     },
     title: {
-        color: '#444',
-        fontWeight: 'bold',
+      color: 'darkslategray',
+      fontSize: '14pt',
+      letterSpacing: '2px',
     },
     body: {
-        borderWidth: '0 1px 1px 1px',
-        borderStyle: 'solid',
-        borderColor: 'coral',
+      borderWidth: '0 1px 1px 1px',
+      borderStyle: 'solid',
+      borderColor: 'darkcyan',
+      padding: '1rem',
+      background: 'linear-gradient(160deg, white, aliceblue)',
     },
-}
+  }
 
-//...
+  //...
 
-    <Panel title="Lorem ipsum." id="lorem-ipsum" styles={ panelStyles }>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, quas nostrum facere non nobis.</p>
-        <p>Tenetur odit incidunt quae deserunt quisquam, deleniti at maxime.</p>
+  <Accordion styes={ panelStyles }>
+    <Panel id="some-unique-id" title="Lorem ipsum." >
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, quas nostrum facere non nobis.</p>
+      <p>Tenetur odit incidunt quae deserunt quisquam, deleniti at.</p>
     </Panel>
 
-//...
+    //...
+
+  </Accordion>
+
+  //...
 ```
 
 ## License

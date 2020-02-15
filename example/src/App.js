@@ -4,17 +4,20 @@ import { requirements } from './panel-data'
 
 const panelStyles = {
     header: {
-        backgroundColor: 'wheat',
-        border: '1px solid coral',
+        backgroundColor: 'beige',
+        border: '1px solid darkcyan',
     },
     title: {
-        color: '#444',
+        color: 'darkslategray',
+        fontSize: '14pt',
         letterSpacing: '2px',
     },
     body: {
         borderWidth: '0 1px 1px 1px',
         borderStyle: 'solid',
-        borderColor: 'coral',
+        borderColor: 'darkcyan',
+        padding: '1rem',
+        background: 'linear-gradient(160deg, white, aliceblue)',
     },
 }
 
@@ -31,13 +34,11 @@ export default class App extends Component {
                     accessible accordions have the following keyboard support:
                 </p>
 
-                <Accordion>
+                <Accordion styles={ panelStyles }>
                     {
                         requirements.map(({ title, id, actions}) => (
-                            <Panel key={ id } title={ title } id={ id } styles={ panelStyles }>
-                                <ul>
-                                    { actions.map((action, i) => <li key={ i }>✔ { action }</li>) }
-                                </ul>
+                            <Panel key={ id } id={ id } title={ title }>
+                                <ul>{ actions.map((action, i) => <li key={ i }>✔ { action }</li>) }</ul>
                             </Panel>
                         ))
                     }

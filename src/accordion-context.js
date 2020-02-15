@@ -21,7 +21,9 @@ export const AccordionProvider = ({ children }) => {
                 setFocusedIndex,
             }}
         >
-            { children }
+            <div className="accordion-root">
+                { children }
+            </div>
         </AccordionContext.Provider>
     )
 }

@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { AccordionProvider } from './accordion-context'
-import { useAccordionContext } from './accordion-context'
 import { Panel } from './panel'
 import accordionStyle from './accordion.css'
 
@@ -31,27 +30,11 @@ import accordionStyle from './accordion.css'
         ⭐ When focus is on an accordion header, moves focus to the last accordion header.
 */
 
-export const Accordion = ({ title, children }) => {
-    return (
-        <AccordionProvider>
-            <Panels children={ children }/>
-        </AccordionProvider>
-    )
-}
+const AccordionContext = createContext()
 
-Accordion.propTypes = {
-    title: PropTypes.string.isRequired,
-    children: PropTypes.arrayOf(PropTypes.shape({
-        type: PropTypes.oneOf([Panel])
-    }))
-}
-
-Accordion.defaultProps = {
-    title: '',
-}
-
-const Panels = ({ children }) => {
-    const { activeIds, toggleId, focusedIndex, setFocusedIndex } = useAccordionContext()
+export const Accordion = ({ children, styles }) => {
+    const [activeIds, setActiveIds] = useState([])
+    const [focusedIndex, setFocusedIndex] = useState(-1)
 
     if (process.env.NODE_ENV === 'development') {
         const panelIds = new Set()
@@ -64,42 +47,70 @@ const Panels = ({ children }) => {
         })
     }
 
+    const toggleId = id => event => {
+        // remove the given id if it's in the activeIds array; add it if it's not
+        const newActiveIds = activeIds.includes(id) ? activeIds.filter(j => j !== id) : [...activeIds, id]
+        setActiveIds(newActiveIds)
+    }
+
     return (
-        <div className={ accordionStyle.accordion }>
-            {
-                children.map((child, i) => {
-                    const id = `panel__${ child.props.id }`
-                    return React.cloneElement(child, {
-                        key: id,
-                        active: activeIds.includes(id),
-                        focused: i === focusedIndex,
-                        clickHandler: toggleId(id),
-                        onFocus: () => setFocusedIndex(i),
-                        onKeyDown: event => {
-                            switch(event.key) {
-                                case 'ArrowUp':
-                                    event.preventDefault()
-                                    setFocusedIndex((focusedIndex - 1 + React.Children.count(children)) % React.Children.count(children))
-                                    break
-                                case 'ArrowDown':
-                                    event.preventDefault()
-                                    setFocusedIndex((focusedIndex + 1) % React.Children.count(children))
-                                    break
-                                case 'Home':
-                                    event.preventDefault()
-                                    setFocusedIndex(0)
-                                    break
-                                case 'End':
-                                    event.preventDefault()
-                                    setFocusedIndex(React.Children.count(children) - 1)
-                                    break
-                                default:
-                                    break
-                            }
-                        },
+        <AccordionContext.Provider
+            value={{
+                panelStyles: styles,
+                activeIds,
+                toggleId,
+                focusedIndex,
+                setFocusedIndex,
+            }}
+        >
+            <div className={ accordionStyle.accordion }>
+                {
+                    children.map((child, i) => {
+                        const id = `panel__${ child.props.id }`
+                        return React.cloneElement(child, {
+                            key: id,
+                            active: activeIds.includes(id),
+                            focused: i === focusedIndex,
+                            clickHandler: toggleId(id),
+                            onFocus: () => setFocusedIndex(i),
+                            onKeyDown: event => {
+                                switch(event.key) {
+                                    case 'ArrowUp':
+                                        event.preventDefault()
+                                        setFocusedIndex((focusedIndex - 1 + React.Children.count(children)) % React.Children.count(children))
+                                        break
+                                    case 'ArrowDown':
+                                        event.preventDefault()
+                                        setFocusedIndex((focusedIndex + 1) % React.Children.count(children))
+                                        break
+                                    case 'Home':
+                                        event.preventDefault()
+                                        setFocusedIndex(0)
+                                        break
+                                    case 'End':
+                                        event.preventDefault()
+                                        setFocusedIndex(React.Children.count(children) - 1)
+                                        break
+                                    default:
+                                        break
+                                }
+                            },
+                        })
                     })
-                })
-            }
-        </div>
+                }
+            </div>
+        </AccordionContext.Provider>
     )
+}
+
+export const useAccordionContext = () => useContext(AccordionContext)
+
+Accordion.propTypes = {
+    children: PropTypes.arrayOf(PropTypes.shape({
+        type: PropTypes.oneOf([Panel])
+    }))
+}
+
+Accordion.defaultProps = {
+    panelStyles: {}
 }
