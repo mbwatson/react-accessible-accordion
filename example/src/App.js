@@ -1,19 +1,6 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { Accordion, Panel } from '@mwatson/react-accessible-accordion'
-import { requirements } from './requirements'
-
-const Main = styled.main`
-    width: calc(100% - 4rem);
-    max-width: 800px;
-    min-height: 100vh;
-    margin: 0 auto;
-`
-
-const Title = styled.h1`
-    text-align: center;
-    margin: 2rem 0;
-`
+import { requirements } from './panel-data'
 
 const panelStyles = {
     header: {
@@ -34,14 +21,14 @@ const panelStyles = {
 export default class App extends Component {
     render () {
         return (
-            <Main>
-                <Title>Accessible Accordion</Title>
+            <main>
+                <h1 className="title">Accessible Accordion Example</h1>
 
                 <p>
-                    Accordion to Accordion Design Pattern in WAI-ARIA Authoring Practices 1.1, which can be found
+                    Accordiong to Accordion Design Pattern in WAI-ARIA Authoring Practices 1.1, which can be found
                     at <a href="https://www.w3.org/TR/wai-aria-practices/examples/accordion/accordion.html" target="_blank"
                     rel="noopener noreferrer">https://www.w3.org/TR/wai-aria-practices/examples/accordion/accordion.html</a>,
-                    requires that accessible accordions have the support for the following keys:
+                    accessible accordions have the following keyboard support:
                 </p>
 
                 <Accordion>
@@ -52,12 +39,11 @@ export default class App extends Component {
                                     { actions.map((action, i) => <li key={ i }>✔ { action }</li>) }
                                 </ul>
                             </Panel>
-
                         ))
                     }
                 </Accordion>
 
-            </Main>
+            </main>
         )
     }
 }
