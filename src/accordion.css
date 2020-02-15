@@ -1,0 +1,60 @@
+.accordion {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+}
+
+.panelWrapper {
+    background-color: #eee;
+    margin-bottom: 1rem;
+}
+
+.header {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 250ms;
+}
+
+.headerButton {
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 250ms, border-color 250ms;
+    background-color: #eee;
+    border: 1px solid;
+    border-color: coral;
+    &:hover, &:focus {
+        filter: saturate(0.5);
+    }
+}
+
+.title {
+    margin: 0 1rem;
+    padding: 0;
+    flex: 1;
+    font-weight: normal;
+}
+
+.iconWrapper {
+    padding: 1rem;
+}
+
+.body {
+    padding: 0;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.panelContents {
+    padding: 1rem;
+}

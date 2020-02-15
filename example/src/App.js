@@ -9,7 +9,7 @@ const panelStyles = {
     },
     title: {
         color: '#444',
-        fontWeight: 'bold',
+        letterSpacing: '2px',
     },
     body: {
         borderWidth: '0 1px 1px 1px',

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { AccordionProvider } from './accordion-context'
 import { useAccordionContext } from './accordion-context'
 import { Panel } from './panel'
+import accordionStyle from './accordion.css'
 
 /**
     Accordion to Accordion Design Pattern in WAI-ARIA Authoring Practices 1.1,
@@ -29,12 +30,6 @@ import { Panel } from './panel'
     🔑 END:
         ⭐ When focus is on an accordion header, moves focus to the last accordion header.
 */
-
-const AccordionWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0.5rem;
-`
 
 export const Accordion = ({ title, children }) => {
     return (
@@ -70,7 +65,7 @@ const Panels = ({ children }) => {
     }
 
     return (
-        <AccordionWrapper>
+        <div className={ accordionStyle.accordion }>
             {
                 children.map((child, i) => {
                     const id = `panel__${ child.props.id }`
@@ -105,6 +100,6 @@ const Panels = ({ children }) => {
                     })
                 })
             }
-        </AccordionWrapper>
+        </div>
     )
 }
