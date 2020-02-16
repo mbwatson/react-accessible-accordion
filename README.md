@@ -27,6 +27,10 @@ accessible accordions have the following required keyboard support:
 
 This accordion component satisfies the above requirements and thus is fully accessible. The package depends [React](https://reactjs.org/). Prior to version 1.1.0, [styled-components](https://styled-components.com/) was a dependency.
 
+## Demo
+
+See [this demo on CodeSandbox](https://codesandbox.io/s/weathered-haze-mg4y3?fontsize=14&hidenavigation=1&theme=dark).
+
 ## Install
 
 ```bash
@@ -109,45 +113,7 @@ The root `Accordion` component takes an object for the `styles` prop, whose prop
 
 ## Contribute
 
-### Linking
-
-During development of the accordion component, we want the example app to use our local copy so we can see changes reflected as they are made. In addition, we want both the `react-accessible-accordion` _and_ the example app to use the same installation of React so there are no conflicts.
-
-An example lives in the `./example` directory. This is a React application bootsrapped with `create-react-app`. To develop, we'll need to link the example to the project source.
-
-First, execute
-
-```bash
-sudo npm link
-```
-
-from the project root, then
-
-```bash
-npm link ../
-```
-
-within the `./example` directory.
-
-This tells the example React app to use the local version of `react-accessible-accordion` instead of requiring an installation from npm. 
-
-Also link the `react-accessible-accordion` to the example app's version of React with
-
-```bash
-npm link ./example/node_modules/react/
-```
-
-in the project root.
-
-### Development
-
-Spin up the example app's development server with
-
-```bash
-npm start
-```
-
-from the `./example` directory. Now develop the `react-accessible-accordion` package as needed, and rebuild it with `npm run build` from the project root to see the changes reflected in the example app.
+Comments, suggestions, questions, and contributions welcome.
 
 ## License
 

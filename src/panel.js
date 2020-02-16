@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
 import { ExpandIcon } from './expand-icon'
 import accordionStyle from './accordion.css'
 import { useAccordionContext } from './accordion'

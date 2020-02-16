@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { AccordionProvider } from './accordion-context'
 import { Panel } from './panel'
 import accordionStyle from './accordion.css'
