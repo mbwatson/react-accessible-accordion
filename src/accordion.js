@@ -37,7 +37,7 @@ export const Accordion = ({ children, styles }) => {
 
     if (process.env.NODE_ENV === 'development') {
         const panelIds = new Set()
-        children.map((child, i) => {
+        React.Children.map(children, (child, i) => {
             if (panelIds.has(child.props.id)) {
                 console.warn(`Panel ids should be unique; the id "${ child.props.id }" is a duplicate.`)
             } else {
@@ -64,7 +64,7 @@ export const Accordion = ({ children, styles }) => {
         >
             <div className={ accordionStyle.accordion }>
                 {
-                    children.map((child, i) => {
+                    React.Children.map(children, (child, i) => {
                         const id = `panel__${ child.props.id }`
                         return React.cloneElement(child, {
                             key: id,
