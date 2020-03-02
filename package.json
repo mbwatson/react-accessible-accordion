@@ -1,6 +1,6 @@
 {
   "name": "@mwatson/react-accessible-accordion",
-  "version": "1.1.1-1",
+  "version": "1.1.2",
   "description": "Accessible accordion component for React",
   "author": "mbwatson",
   "license": "MIT",
