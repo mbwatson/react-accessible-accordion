@@ -29,13 +29,14 @@
     align-items: center;
     padding: 0;
     cursor: pointer;
-    transition: background-color 250ms, border-color 250ms;
+    transition: background-color 250ms, border-color 250ms, filter 250ms;
     background-color: #eee;
     border: 1px solid;
     border-color: coral;
-    &:hover, &:focus {
-        filter: saturate(0.5);
-    }
+}
+
+.headerButton:hover, .headerButton:focus {
+    filter: brightness(0.8);
 }
 
 .title {
