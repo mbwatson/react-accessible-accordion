@@ -111,6 +111,15 @@ The root `Accordion` component takes an object for the `styles` prop, whose prop
   //...
 ```
 
+### Icon Placement
+
+The component ships with an icon (plus sign that animates to a minus sign) indicating the current state (expanded or collapsed) of the accordion panels. the `iconPlacement` prop can take a value of `left` or `right` to render the indicator icon before the title or after, respectively.
+
+```
+<Accordion styles={panelStyles} iconPlacement="right">
+```
+
+
 ## Contribute
 
 Comments, suggestions, questions, and contributions welcome.

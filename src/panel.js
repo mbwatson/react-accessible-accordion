@@ -3,11 +3,19 @@ import { ExpandIcon } from './expand-icon'
 import accordionStyle from './accordion.css'
 import { useAccordionContext } from './accordion'
 
+const IndicatorIcon = ({ active }) => {
+    return (
+        <span className={ accordionStyle.iconWrapper }>
+            <ExpandIcon size={ 12 } active={ active } color={ active ? 'crimson' : '#333' } />
+        </span>
+    )
+}
+
 export const Panel = ({ active, focused, id, title, children, styles = {}, clickHandler, ...rest }) => {
     const [height, setHeight] = useState(0)
     const bodyElement = useRef(null)
     const panelRef = useRef()
-    const { panelStyles } = useAccordionContext()
+    const { panelStyles, iconPlacement } = useAccordionContext()
 
     useEffect(() => {
         setHeight(active ? bodyElement.current.scrollHeight : 0)
@@ -21,6 +29,8 @@ export const Panel = ({ active, focused, id, title, children, styles = {}, click
 
     const headerId = `${ id }__header`
     const bodyId = `${ id }__body`
+    
+    console.log( 'in panel', iconPlacement )
 
     return (
         <article id={ id }
@@ -31,10 +41,9 @@ export const Panel = ({ active, focused, id, title, children, styles = {}, click
                 <button ref={ panelRef } id={ headerId } className={ accordionStyle.headerButton } style={ panelStyles.header }
                     onClick={ clickHandler } aria-controls={ bodyId } aria-expanded={ active }
                 >
+                    { iconPlacement === 'left' && <IndicatorIcon active={ active } /> }
                     <h2 className={ accordionStyle.title } style={ panelStyles.title }>{ title }</h2>
-                    <span className={ accordionStyle.iconWrapper }>
-                        <ExpandIcon size={ 12 } active={ active } color={ active ? 'crimson' : '#333' } />
-                    </span>
+                    { iconPlacement === 'right' && <IndicatorIcon active={ active } /> }
                 </button>
             </header>
             <div

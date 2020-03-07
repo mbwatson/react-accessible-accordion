@@ -31,9 +31,10 @@ import accordionStyle from './accordion.css'
 
 const AccordionContext = createContext()
 
-export const Accordion = ({ children, styles }) => {
+export const Accordion = ({ children, styles, iconPlacement }) => {
     const [activeIds, setActiveIds] = useState([])
     const [focusedIndex, setFocusedIndex] = useState(-1)
+    console.log( 'in accordion', iconPlacement )
 
     if (process.env.NODE_ENV === 'development') {
         const panelIds = new Set()
@@ -60,6 +61,7 @@ export const Accordion = ({ children, styles }) => {
                 toggleId,
                 focusedIndex,
                 setFocusedIndex,
+                iconPlacement,
             }}
         >
             <div className={ accordionStyle.accordion }>
@@ -107,9 +109,11 @@ export const useAccordionContext = () => useContext(AccordionContext)
 Accordion.propTypes = {
     children: PropTypes.arrayOf(PropTypes.shape({
         type: PropTypes.oneOf([Panel])
-    }))
+    })),
+    iconPlacement: PropTypes.string,
 }
 
 Accordion.defaultProps = {
-    panelStyles: {}
+    panelStyles: {},
+    iconPlacement: 'right',
 }
