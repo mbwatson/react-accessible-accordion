@@ -39,7 +39,7 @@ npm i react-accessible-accordion
 
 ## Usage
 
-Use the `Accordion` component to wrap `Panel` components. Children of `Accordion` must be `Panel` components and their `id`s must be unique.
+Use the `Accordion` component to wrap `Panel` components and other components. `Panel` components must live inside the `Accordion` component, as it provides the [context](https://reactjs.org/docs/context.html) for the `Panel` components. In addition, the `Panel` components' `id`s must be unique.
 
 ```jsx
 import React, { Component } from 'react'
@@ -119,6 +119,45 @@ The component ships with an icon (plus sign that animates to a minus sign) indic
 <Accordion styles={panelStyles} iconPlacement="right">
 ```
 
+### Additional Context Exposed
+
+The `Accordion` context also exposes a couple helper functions&mdash;`setAllPanelsActive` and `setAllPanelsInactiveto`&mdash;to implement buttons to Expand All and Collapse All accordion panels.
+
+```jsx
+const ExpandAllPanelsButton = () => {
+  const { setAllPanelsActive } = useAccordion()
+  return (
+    <button onClick={ setAllPanelsActive }>Expand All</button>
+  )
+}
+
+const CollapseAllPanelsButton = () => {
+  const { setAllPanelsInactive } = useAccordion()
+  return (
+    <button onClick={ setAllPanelsInactive }>Collapse All</button>
+  )
+}
+
+const App = () => {
+  return (
+    <Accordion styes={ panelStyles }>
+      <div>
+        <ExpandAllPanelsButton />
+        <CollapseAllPanelsButton />
+      </div>
+      <Panel id="some-unique-id" title="Lorem ipsum." >
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, quas nostrum facere non nobis.</p>
+        <p>Tenetur odit incidunt quae deserunt quisquam, deleniti at.</p>
+      </Panel>
+
+      //...
+
+    </Accordion>
+  )
+}
+```
+
+Note that, because the buttons need to consume the Accordion context, they must reside within the Accordion component.
 
 ## Contribute
 

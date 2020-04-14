@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { AccordionProvider } from './accordion-context'
 import { Panel } from './panel'
 import accordionStyle from './accordion.css'
 
@@ -29,29 +28,51 @@ import accordionStyle from './accordion.css'
         ⭐ When focus is on an accordion header, moves focus to the last accordion header.
 */
 
-const AccordionContext = createContext()
+export const AccordionContext = createContext()
 
 export const Accordion = ({ children, styles, iconPlacement }) => {
     const [activeIds, setActiveIds] = useState([])
     const [focusedIndex, setFocusedIndex] = useState(-1)
-    console.log( 'in accordion', iconPlacement )
-
+    const [panelIds, setPanelIds] = useState([])
+    
+    // in development, warn about non-unique panel IDs
     if (process.env.NODE_ENV === 'development') {
-        const panelIds = new Set()
-        React.Children.map(children, (child, i) => {
-            if (panelIds.has(child.props.id)) {
-                console.warn(`Panel ids should be unique; the id "${ child.props.id }" is a duplicate.`)
+        const ids = new Set()
+        const panels = React.Children.toArray(children).filter(child => child.type.name === 'Panel')
+        panels.map((panel, i) => {
+            if (ids.has(panel.props.id)) {
+                console.warn(`Panel ids should be unique; the id "${ panel.props.id }" is a duplicate.`)
             } else {
-                panelIds.add(child.props.id)
+                ids.add(panel.props.id)
             }
         })
     }
+
+    useEffect(() => {
+        const ids = React.Children.toArray(children)
+            .filter(child => child.type.name === 'Panel')
+            .map(panel => `panel__${ panel.props.id }`)
+        setPanelIds(ids)
+    }, [])
+
+    useEffect(() => {
+        const checkPanelIdUniqueness = () => {
+            return panelIds === [...new Set(panelIds)]
+        }
+        if (panelIds.length > 0 && process.env.NODE_ENV === 'development') {
+            checkPanelIdUniqueness()
+        }
+    }, [panelIds])
 
     const toggleId = id => event => {
         // remove the given id if it's in the activeIds array; add it if it's not
         const newActiveIds = activeIds.includes(id) ? activeIds.filter(j => j !== id) : [...activeIds, id]
         setActiveIds(newActiveIds)
     }
+
+    const setAllPanelsActive = useCallback(() => setActiveIds(panelIds), [panelIds])
+
+    const setAllPanelsInactive = useCallback(() => setActiveIds([]), [])
 
     return (
         <AccordionContext.Provider
@@ -62,6 +83,8 @@ export const Accordion = ({ children, styles, iconPlacement }) => {
                 focusedIndex,
                 setFocusedIndex,
                 iconPlacement,
+                setAllPanelsActive,
+                setAllPanelsInactive,
             }}
         >
             <div className={ accordionStyle.accordion }>
@@ -104,12 +127,10 @@ export const Accordion = ({ children, styles, iconPlacement }) => {
     )
 }
 
-export const useAccordionContext = () => useContext(AccordionContext)
+export const useAccordion = () => useContext(AccordionContext)
 
 Accordion.propTypes = {
-    children: PropTypes.arrayOf(PropTypes.shape({
-        type: PropTypes.oneOf([Panel])
-    })),
+    children: PropTypes.arrayOf(PropTypes.node),
     iconPlacement: PropTypes.string,
 }
 

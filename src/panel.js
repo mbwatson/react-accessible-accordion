@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ExpandIcon } from './expand-icon'
 import accordionStyle from './accordion.css'
-import { useAccordionContext } from './accordion'
+import { useAccordion } from './accordion'
 
 const IndicatorIcon = ({ active }) => {
     return (
@@ -15,7 +15,7 @@ export const Panel = ({ active, focused, id, title, children, styles = {}, click
     const [height, setHeight] = useState(0)
     const bodyElement = useRef(null)
     const panelRef = useRef()
-    const { panelStyles, iconPlacement } = useAccordionContext()
+    const { panelStyles, iconPlacement } = useAccordion()
 
     useEffect(() => {
         setHeight(active ? bodyElement.current.scrollHeight : 0)
@@ -30,8 +30,6 @@ export const Panel = ({ active, focused, id, title, children, styles = {}, click
     const headerId = `${ id }__header`
     const bodyId = `${ id }__body`
     
-    console.log( 'in panel', iconPlacement )
-
     return (
         <article id={ id }
             className={ accordionStyle.panelWrapper }
