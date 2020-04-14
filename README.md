@@ -29,7 +29,7 @@ This accordion component satisfies the above requirements and thus is fully acce
 
 ## Demo
 
-See [this demo on CodeSandbox](https://codesandbox.io/s/weathered-haze-mg4y3?fontsize=14&hidenavigation=1&theme=dark).
+See this CodeSandbox [demo](https://codesandbox.io/s/frosty-smoke-bqjbo).
 
 ## Install
 
@@ -121,7 +121,7 @@ The component ships with an icon (plus sign that animates to a minus sign) indic
 
 ### Additional Context Exposed
 
-The `Accordion` context also exposes a couple helper functions&mdash;`setAllPanelsActive` and `setAllPanelsInactiveto`&mdash;to implement buttons to Expand All and Collapse All accordion panels.
+The `Accordion` context also exposes a couple helper functions&mdash;`setAllPanelsActive` and `setAllPanelsInactiveto`&mdash;to implement buttons to Expand All and Collapse All accordion panels. These can be destructured from the object returned by the `useAccordion` hook.
 
 ```jsx
 const ExpandAllPanelsButton = () => {
